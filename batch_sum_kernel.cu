@@ -20,5 +20,5 @@ void batch_sum_kernel_exec(const float *src, float *dst, int m, int n){
 
     /* lunch kernel */
     batch_sum_kernel<<<grid, block>>>(src, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

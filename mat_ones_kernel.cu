@@ -19,5 +19,5 @@ void mat_ones_kernel_exec(const float *src, float *dst, int m, int n){
 
     /* lunch kernel */
     mat_ones_kernel<<<grid, block>>>(src, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

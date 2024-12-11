@@ -68,17 +68,17 @@ void softmax_kernel_exec(const float *src, float *dst, int m, int n){
 
     cudaError_t error = cudaMalloc((void**) &max, m * sizeof(*max));
     error = cudaMalloc((void**) &sum, m * sizeof(*sum));
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     cudaMemset(max, 0x00, m * sizeof(*max));
     cudaMemset(sum, 0x00, m * sizeof(*sum));
 
     /* lunch kernel */
     softmax_kernel3<<<grid, block>>>(src, m, n, max);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     softmax_kernel2<<<grid, block>>>(src, dst, m, n, sum, max);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     softmax_kernel<<<grid, block>>>(src, dst, m, n, sum, max);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     cudaFree(max);
     cudaFree(sum);
 }

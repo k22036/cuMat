@@ -22,6 +22,6 @@ void mat_dot_product_kernel_exec(const float *src1, const float *src2, float *ds
 
     /* lunch kernel */
     mat_dot_product_kernel<<<grid, block>>>(src1, src2, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

@@ -24,6 +24,6 @@ void mat_cos_kernel_exec(const float *src, float *dst, int m, int n, float alpha
 
     /* lunch kernel */
     mat_cos_kernel<<<grid, block>>>(src, dst, m, n, alpha);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

@@ -24,5 +24,5 @@ void prelu_d_kernel_exec(const float *src, const float *a, float *dst, float *da
 
     /* lunch kernel */
     prelu_d_kernel<<<grid, block>>>(src, a, dst, da, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

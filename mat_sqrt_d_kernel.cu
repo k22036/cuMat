@@ -25,6 +25,6 @@ void mat_sqrt_d_kernel_exec(const float *src, float *dst, int m, int n, float al
 
     /* lunch kernel */
     mat_sqrt_d_kernel<<<grid, block>>>(src, dst, m, n, alpha);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

@@ -24,5 +24,5 @@ void relu_kernel_exec(const float *src, float *dst, int m, int n){
 
     /* lunch kernel */
     relu_kernel<<<grid, block>>>(src, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

@@ -29,6 +29,6 @@ void softmax_cross_entropy_kernel_exec(const float *src1, const float *src2, flo
 
     /* lunch kernel */
     softmax_cross_entropy_kernel<<<grid, block>>>(src1, src2, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

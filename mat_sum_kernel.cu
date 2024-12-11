@@ -20,5 +20,5 @@ void mat_sum_kernel_exec(const float *src, float *dst, int m, int n){
 
     /* lunch kernel */
     mat_sum_kernel<<<grid, block>>>(src, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

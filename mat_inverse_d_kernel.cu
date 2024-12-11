@@ -24,6 +24,6 @@ void mat_inverse_d_kernel_exec(const float *src, float *dst, int m, int n){
 
     /* lunch kernel */
     mat_inverse_d_kernel<<<grid, block>>>(src, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

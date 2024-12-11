@@ -23,6 +23,6 @@ void mat_vec_mul_kernel_exec(const float *src_mat, const float *src_vec, float *
 
     /* lunch kernel */
     mat_vec_mul_kernel<<<grid, block>>>(src_mat, src_vec, dst, m, n, axis);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

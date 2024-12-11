@@ -32,6 +32,6 @@ void adam2_kernel_exec(float *mm, float *mv, const float *mg, float *dst, float 
 
     /* lunch kernel */
     adam2_kernel<<<grid, block>>>(mm, mv, mg, dst, beta1, beta2, lr, e, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

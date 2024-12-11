@@ -64,5 +64,5 @@ void dropout_kernel_exec(const float *src, float *dst, float *dst_idx, int m, in
 
     /* lunch kernel */
     dropout_kernel<<<grid, block>>>(src, dst, dst_idx, m, n, p, seed);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

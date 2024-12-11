@@ -25,6 +25,6 @@ void mat_l2_kernel_exec(const float *src, float *dst, int m, int n){
 
     /* lunch kernel */
     mat_l2_kernel<<<grid, block>>>(src, dst, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

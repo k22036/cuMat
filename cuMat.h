@@ -142,13 +142,13 @@ public:
         rows = 0;
         cols = 0;
         cublasCreate(&cudaHandle);
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     cuMat(int rows, int cols) {
 
         cublasCreate(&cudaHandle);
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
 
         new_matrix(rows, cols);
 
@@ -156,7 +156,7 @@ public:
 
     cuMat(const cuMat &a) {
         cublasCreate(&cudaHandle);
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
 
         new_matrix(a.rows, a.cols);
 
@@ -193,7 +193,7 @@ public:
                 rows * cols * sizeof(*mDevice));
         if (error != cudaSuccess) printf("cudaMemcpy error\n");
         cudaMemset(mDevice, 0x00, rows * cols * sizeof(*mDevice));
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
 
     }
 
@@ -215,7 +215,7 @@ public:
             if (error != cudaSuccess) printf("cuMat::new_matrix cudaMalloc error\n");
 
             cudaMemset(mDevice, 0x00, rows * cols * sizeof(*mDevice));
-            cudaThreadSynchronize();
+            cudaDeviceSynchronize();
             mallocCounter.up();
 
         }
@@ -231,7 +231,7 @@ public:
             free(mHost);
             mHost = NULL;
         }
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     void memHostToDevice() {
@@ -507,7 +507,7 @@ public:
                 b.mDevice, rows, r.mDevice, r.rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     void minus(const cuMat &b, cuMat &r) {
@@ -519,7 +519,7 @@ public:
                 b.mDevice, rows, r.mDevice, r.rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     void mul(const float alpha, cuMat &r) {
@@ -530,7 +530,7 @@ public:
                 r.mDevice, r.rows, r.mDevice, r.rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
     void mul_plus(const float alpha, cuMat &r) {
 
@@ -540,7 +540,7 @@ public:
                 r.mDevice, r.rows, r.mDevice, r.rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
 
@@ -556,7 +556,7 @@ public:
                 i.mDevice, i.rows, r.mDevice, r.rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
     void plus(const float beta, cuMat &i, cuMat &r) {
 
@@ -566,7 +566,7 @@ public:
                 i.mDevice, i.rows, r.mDevice, r.rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     void div(const float p, cuMat &r) {
@@ -600,7 +600,7 @@ public:
         checkCublasErrors(stat);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgemm dot" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
     void dot_plus(const cuMat &b, cuMat &r) {
 
@@ -616,7 +616,7 @@ public:
         checkCublasErrors(stat);
                 if (stat != CUBLAS_STATUS_SUCCESS)
                     cout << "cannot cublasSgemm dot_plus" << endl;
-                cudaThreadSynchronize();
+                cudaDeviceSynchronize();
         }
 
     void transpose_dot_plus(const cuMat &b, cuMat &r) {
@@ -633,7 +633,7 @@ public:
         checkCublasErrors(stat);
             if (stat != CUBLAS_STATUS_SUCCESS)
                 cout << "cannot cublasSgemm transpose_dot_plus" << endl;
-            cudaThreadSynchronize();
+            cudaDeviceSynchronize();
     }
     void dot_transpose_plus(const cuMat &b, cuMat &r) {
 
@@ -649,7 +649,7 @@ public:
         checkCublasErrors(stat);
             if (stat != CUBLAS_STATUS_SUCCESS)
                 cout << "cannot cublasSgemm dot_transpose_plus" << endl;
-            cudaThreadSynchronize();
+            cudaDeviceSynchronize();
     }
 
     cuMat transpose() {
@@ -666,7 +666,7 @@ public:
                 r.mDevice, cols);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     void plus_util(float alpha, float beta, cuMat &b, cuMat &r) {
@@ -676,7 +676,7 @@ public:
                 r.mDevice, rows);
         if (stat != CUBLAS_STATUS_SUCCESS)
             cout << "cannot cublasSgeam" << endl;
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
     }
 
     void mul(const cuMat &m, cuMat &r) {
@@ -835,7 +835,7 @@ public:
         float sum_h=0;
         cudaError_t error = cudaMalloc((void**) &sum_d, sizeof(*sum_d));
         if (error != cudaSuccess) printf("cudaMemcpy error\n");
-        cudaThreadSynchronize();
+        cudaDeviceSynchronize();
         cudaMemset(sum_d, 0x00, sizeof(*sum_d));
         mat_sum_kernel_exec(mDevice, sum_d, cols, rows);
 
@@ -852,7 +852,7 @@ public:
             float sum_h=0;
             cudaError_t error = cudaMalloc((void**) &sum_d, sizeof(*sum_d));
             if (error != cudaSuccess) printf("cudaMemcpy error\n");
-            cudaThreadSynchronize();
+            cudaDeviceSynchronize();
             cudaMemset(sum_d, 0x00, sizeof(*sum_d));
             mat_l2_kernel_exec(mDevice, sum_d, cols, rows);
 

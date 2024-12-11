@@ -22,5 +22,5 @@ void mat_mul_elementwise_plus_kernel_exec(const float *src1, const float *src2, 
 
     /* lunch kernel */
     mat_mul_elementwise_plus_kernel<<<grid, block>>>(src1, src2, dst, alpha, beta, m, n);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 }

@@ -27,6 +27,6 @@ void element_wise_clip_kernel_exec(const float *src, float *dst, int m, int n, f
 
     /* lunch kernel */
     element_wise_clip_kernel<<<grid, block>>>(src, dst, m, n, threshold);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }

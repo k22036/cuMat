@@ -24,7 +24,7 @@ void slice_rows_kernel_exec(const float *src, float *dst, int m, int n, int offs
 
     /* lunch kernel */
     slice_rows_kernel<<<grid, block>>>(src, dst, m, n, offset, len);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }
 
@@ -50,6 +50,6 @@ void join_rows_kernel_exec(const float *src, float *dst, int m, int n, int offse
 
     /* lunch kernel */
     join_rows_kernel<<<grid, block>>>(src, dst, m, n, offset, len);
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
 }
